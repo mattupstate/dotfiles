@@ -52,7 +52,7 @@ mitsuhikos_backgroundjobs() {
 
 mitsuhikos_virtualenv() {
   if [ x$VIRTUAL_ENV != x ]; then
-    if [[ $VIRTUAL_ENV == *.virtualenvs/* ]]; then
+    if [[ $VIRTUAL_ENV == *.virtualenv/* ]]; then
       ENV_NAME=`basename "${VIRTUAL_ENV}"`
     else
       folder=`dirname "${VIRTUAL_ENV}"`
@@ -95,7 +95,7 @@ export LESS=FRSX
 if [ `id -u` != '0' ]; then
   export VIRTUALENV_DISTRIBUTE=1
   if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    export WORKON_HOME=$HOME/.virtualenvs
+    export WORKON_HOME=$HOME/.virtualenv
     source /usr/local/bin/virtualenvwrapper.sh
   fi
 fi
