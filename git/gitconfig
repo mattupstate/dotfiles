@@ -1,6 +1,6 @@
 [user]
-	name = Armin Ronacher
-	email = armin.ronacher@active-4.com
+	name = Matt Wright
+	email = matt@nobien.net
 [core]
 	excludesfile = ~/.gitignore
 	autocrlf = input
@@ -42,3 +42,7 @@
 	default=current
 [branch]
 	autosetupmerge = true
+[diff]
+    tool = twdiff
+[difftool "twdiff"]
+    cmd = twdiff --wait \"$LOCAL\" \"$REMOTE\"

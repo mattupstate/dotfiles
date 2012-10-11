@@ -1,0 +1,58 @@
+# Configs
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+
+# Monitor Aliases
+alias mon-laptop      1680x1050
+alias mon-cinema      2560x1440
+
+# 1 Monitor Position Aliases
+alias 1-chat         move screenOriginX;screenOriginY                    186;screenSizeY                      ${mon-laptop}
+alias 1-chat-l       move screenOriginX+186;screenOriginY                747;747                              ${mon-laptop}
+alias 1-chat-r       move screenOriginX+933;screenOriginY                747;747                              ${mon-laptop}
+alias 1-tweet        move screenOriginX+screenSizeX-332;screenOriginY    332;screenSizeY                      ${mon-laptop}
+alias 1-main         move screenOriginX;screenOriginY                    screenSizeX;screenSizeY              ${mon-laptop}
+alias 1-mid          move screenOriginX+screenSizeX/9;screenOriginY      8*screenSizeX/9-332;screenSizeY      ${mon-laptop}
+alias 1-top-l        corner top-left                                     resize:screenSizeX/2;screenSizeY/2   ${mon-laptop}
+alias 1-top-r        corner top-right                                    resize:screenSizeX/2;screenSizeY/2   ${mon-laptop}
+alias 1-bot-l        corner bottom-left                                  resize:screenSizeX/2;screenSizeY/2   ${mon-laptop}
+alias 1-bot-r        corner bottom-right                                 resize:screenSizeX/2;screenSizeY/2   ${mon-laptop}
+
+# 2 Monitor Position Aliases
+alias 2-main    move screenOriginX;screenOriginY                    screenSizeX;screenSizeY                ${mon-cinema}
+alias 2-top     move screenOriginX;screenOriginY                    screenSizeX;screenSizeY/2              ${mon-cinema}
+alias 2-bot     move screenOriginX;screenOriginY+screenSizeY/2      screenSizeX/2;screenSizeY/2            ${mon-cinema}
+alias 2-left    move screenOriginX;screenOriginY                    screenSizeX/2;screenSizeY              ${mon-cinema}
+alias 2-right   move screenOriginX+screenSizeX/2;screenOriginY      screenSizeX/2;screenSizeY              ${mon-cinema}
+alias 2-top-l   corner top-left                                     resize:screenSizeX/2;screenSizeY/2     ${mon-cinema}
+alias 2-top-r   corner top-right                                    resize:screenSizeX/2;screenSizeY/2     ${mon-cinema}
+alias 2-bot-l   corner bottom-left                                  resize:screenSizeX/2;screenSizeY/2     ${mon-cinema}
+alias 2-bot-r   corner bottom-right                                 resize:screenSizeX/2;screenSizeY/2     ${mon-cinema}
+
+# 1 Monitor Layout
+layout 1monitor 'Terminal':SORT_TITLE,REPEAT              ${1-top-l} | ${1-top-r} | ${1-bot-l} | ${1-bot-r}
+layout 1monitor 'iTerm':SORT_TITLE,REPEAT                 ${1-main}
+layout 1monitor 'Sublime Text 2':REPEAT                   ${1-main}
+layout 1monitor 'Google Chrome':REPEAT                    ${1-mid}
+layout 1monitor 'Spotify':REPEAT                          ${1-mid}
+layout 1monitor 'TweetDeck'                               ${1-tweet}
+layout 1monitor 'Adium':TITLE_ORDER=Contacts,REPEAT       ${1-chat} | ${1-chat-l} | ${1-chat-r}
+layout 1monitor 'Finder':REPEAT                           ${1-top-l} | ${1-top-r} | ${1-bot-l} | ${1-bot-r}
+
+# 2 Monitor Layout
+layout 2monitors 'Terminal':SORT_TITLE,REPEAT             ${2-top-l} | ${2-top-r} | ${2-bot-l} | ${2-bot-r}
+layout 2monitors 'iTerm':SORT_TITLE,REPEAT                ${2-main} 
+layout 2monitors 'Google Chrome'                          ${1-mid}
+layout 2monitors 'Sublime Text 2':REPEAT                  ${2-main}
+layout 2monitors 'Spotify':REPEAT                         ${1-main}
+layout 2monitors 'TweetDeck'                              ${1-tweet}
+layout 2monitors 'Adium':TITLE_ORDER=Contacts,REPEAT      ${1-chat} | ${2-top-l} | ${2-top-r} | ${2-bot-l} | ${2-bot-r}
+layout 2monitors 'Finder':REPEAT                          ${2-top-l} | ${2-top-r} | ${2-bot-l} | ${2-bot-r}
+
+# Default Layouts
+default 2monitors resolutions:${mon-laptop};${mon-cinema}
+default 1monitor  resolutions:${mon-laptop}
+
+bind 1:ctrl,cmd,alt layout 1monitor
+bind 2:ctrl,cmd,alt layout 2monitors
