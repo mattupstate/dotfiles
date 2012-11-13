@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# export EDITOR=vim
+export EDITOR=vim
 
 MATTS_DEFAULT_COLOR="[00m"
 MATTS_GRAY_COLOR="[37m"
@@ -93,6 +93,7 @@ fi
 alias rmpyc="find . -name "*.pyc" -exec rm -rf {} \;"
 alias diff='twdiff'
 
-export EDITOR="subl"
+# export EDITOR="subl"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:/opt/mongodb/bin # Add MongoDB to PATH
