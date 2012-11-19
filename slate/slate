@@ -3,6 +3,8 @@ config defaultToCurrentScreen true
 config nudgePercentOf screenSize
 config resizePercentOf screenSize
 
+
+
 # Monitor Aliases
 alias mon-laptop      1680x1050
 alias mon-cinema      2560x1440
@@ -36,17 +38,17 @@ layout 1monitor 'iTerm':SORT_TITLE,REPEAT                 ${1-main}
 layout 1monitor 'Sublime Text 2':REPEAT                   ${1-main}
 layout 1monitor 'Google Chrome':REPEAT                    ${1-mid}
 layout 1monitor 'Spotify':REPEAT                          ${1-mid}
-layout 1monitor 'TweetDeck'                               ${1-tweet}
+layout 1monitor 'TweetDeck'                               ${1-mid}
 layout 1monitor 'Adium':TITLE_ORDER=Contacts,REPEAT       ${1-chat} | ${1-chat-l} | ${1-chat-r}
 layout 1monitor 'Finder':REPEAT                           ${1-top-l} | ${1-top-r} | ${1-bot-l} | ${1-bot-r}
 
 # 2 Monitor Layout
 layout 2monitors 'Terminal':SORT_TITLE,REPEAT             ${2-top-l} | ${2-top-r} | ${2-bot-l} | ${2-bot-r}
-layout 2monitors 'iTerm':SORT_TITLE,REPEAT                ${2-main} 
-layout 2monitors 'Google Chrome'                          ${1-mid}
+layout 2monitors 'iTerm':SORT_TITLE,REPEAT                ${2-main}
+layout 2monitors 'Google Chrome':REPEAT                   ${1-mid} | ${2-left} | ${2-right}  | ${2-left} | ${2-right}
 layout 2monitors 'Sublime Text 2':REPEAT                  ${2-main}
 layout 2monitors 'Spotify':REPEAT                         ${1-main}
-layout 2monitors 'TweetDeck'                              ${1-tweet}
+layout 2monitors 'TweetDeck'                              ${1-mid}
 layout 2monitors 'Adium':TITLE_ORDER=Contacts,REPEAT      ${1-chat} | ${2-top-l} | ${2-top-r} | ${2-bot-l} | ${2-bot-r}
 layout 2monitors 'Finder':REPEAT                          ${2-top-l} | ${2-top-r} | ${2-bot-l} | ${2-bot-r}
 
@@ -56,3 +58,27 @@ default 1monitor  resolutions:${mon-laptop}
 
 bind 1:ctrl,cmd,alt layout 1monitor
 bind 2:ctrl,cmd,alt layout 2monitors
+
+# Resize using Option+Command
+bind right:alt;cmd resize +10% +0
+bind left:alt;cmd  resize -10% +0
+bind up:alt;cmd    resize +0   -10%
+bind down:alt;cmd  resize +0   +10%
+
+# Push using Control+Command
+bind right:ctrl;cmd push right bar-resize:screenSizeX/2
+bind left:ctrl;cmd  push left  bar-resize:screenSizeX/2
+bind up:ctrl;cmd    push up    bar-resize:screenSizeY/2
+bind down:ctrl;cmd  push down  bar-resize:screenSizeY/2
+
+# Nudge using Control+Option
+bind right:ctrl;alt nudge +10% +0
+bind left:ctrl;alt  nudge -10% +0
+bind up:ctrl;alt    nudge +0   -10%
+bind down:ctrl;alt  nudge +0   +10%
+
+# Throw to monitor using Control+Option+Command
+bind up:ctrl;alt;cmd    throw 0 resize
+bind down:ctrl;alt;cmd  throw 1 resize
+
+bind esc:cmd hint
