@@ -74,7 +74,7 @@ export VIRTUALENV_DISTRIBUTE=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-  export WORKON_HOME=$HOME/.virtualenv
+  export WORKON_HOME=$HOME/.virtualenvs
   source /usr/local/bin/virtualenvwrapper.sh
 fi
 

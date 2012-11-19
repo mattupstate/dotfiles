@@ -1,3 +1,6 @@
+bind "set completion-ignore-case on"
+bind "set show-all-if-ambiguous on"
+
 # Load .profile, containing login, non-bash related initializations.
 source ~/.profile
  
