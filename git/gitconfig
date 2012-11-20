@@ -43,6 +43,6 @@
 [branch]
 	autosetupmerge = true
 [diff]
-    tool = twdiff
-[difftool "twdiff"]
-    cmd = twdiff --wait \"$LOCAL\" \"$REMOTE\"
+	tool = opendiff
+[difftool]
+	prompt = false

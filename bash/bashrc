@@ -3,6 +3,10 @@
 
 export EDITOR=vim
 
+if [ -f "/usr/local/bin/activate.sh" ] ; then
+    source /usr/local/bin/activate.sh
+fi
+
 MATTS_DEFAULT_COLOR="[00m"
 MATTS_GRAY_COLOR="[37m"
 MATTS_PINK_COLOR="[35m"
@@ -28,7 +32,7 @@ matts_lastcommandfailed() {
 
 matts_virtualenv() {
   if [ x$VIRTUAL_ENV != x ]; then
-    if [[ $VIRTUAL_ENV == *.virtualenv/* ]]; then
+    if [[ $VIRTUAL_ENV == *.virtualenvs/* ]]; then
       ENV_NAME=`basename "${VIRTUAL_ENV}"`
     else
       folder=`dirname "${VIRTUAL_ENV}"`
@@ -37,6 +41,22 @@ matts_virtualenv() {
     echo -n $' \033[37mworkon:\033[34m'
     echo -n $ENV_NAME
     echo -n $'\033[00m'
+  fi
+}
+
+use_env() {
+  typeset venv
+  venv="$1"
+  if [[ "${VIRTUAL_ENV:t}" != "$venv" ]]; then
+    if workon | grep -q "$venv"; then
+      workon "$venv"
+    else
+      echo -n "Create virtualenv $venv now? (Yn) "
+      read answer
+      if [[ "$answer" == "Y" ]]; then
+        mkvirtualenv "$venv"
+      fi
+    fi
   fi
 }
 
