@@ -51,10 +51,17 @@ use_env() {
     if workon | grep -q "$venv"; then
       workon "$venv"
     else
-      echo -n "Create virtualenv $venv now? (Yn) "
+      echo -n "Create virtualenv $venv now? (y/n) "
       read answer
-      if [[ "$answer" == "Y" ]]; then
+      if [[ "$answer" == "y" ]]; then
         mkvirtualenv "$venv"
+        if [ -f "requirements.txt" ] ; then
+          echo -n "Install dependencies from requirements.txt? (y/n) "
+          read answer
+          if [[ "$answer" == "y" ]] ; then
+            pip install -r requirements.txt
+          fi
+        fi
       fi
     fi
   fi
@@ -101,12 +108,11 @@ fi
 alias ..='cd ..'
 shopt -s histappend
 
-if [ -f /usr/local/git/contrib/completion ]; then
-  . /usr/local/git/contrib/completion/git-completion.bash
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
 fi
-if [ -f /etc/bash_completion ]; then
-  . /etc/bash_completion
-fi
+
+
 
 # don't let virtualenv show prompts by itself
 

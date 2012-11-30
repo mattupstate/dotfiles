@@ -42,7 +42,3 @@
 	default=current
 [branch]
 	autosetupmerge = true
-[diff]
-	tool = opendiff
-[difftool]
-	prompt = false
