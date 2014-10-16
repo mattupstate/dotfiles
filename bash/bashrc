@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export EDITOR=vim
+export EDITOR="subl --wait"
 
 if [ -f "/usr/local/bin/activate.sh" ] ; then
     source /usr/local/bin/activate.sh
@@ -19,6 +19,14 @@ MATTS_VC_PROMPT_EX="$MATTS_VC_PROMPT%m%u"
 
 matts_vcprompt() {
   vcprompt -f "$MATTS_VC_PROMPT"
+}
+
+matts_rvm() {
+  if [ x$rvm_sticky_flag != x ]; then
+    echo -n $' \033[37mrvm:\033[34m'
+    echo -n `$HOME/.rvm/bin/rvm-prompt`
+    echo -n $'\033[00m'
+  fi
 }
 
 matts_lastcommandfailed() {
@@ -73,6 +81,7 @@ export MATTS_BASEPROMPT='\n\e${MATTS_PINK_COLOR}\u \
 `matts_lastcommandfailed`\
 \e${MATTS_GRAY_COLOR}`matts_vcprompt`\
 `matts_virtualenv`\
+`matts_rvm`\
 \e${MATTS_DEFAULT_COLOR}'
 
 export PS1="\[\033[G\]${MATTS_BASEPROMPT}
@@ -86,18 +95,17 @@ if [ `uname` == "Darwin" ]; then
   export LC_CTYPE=en_US.utf-8
   export LC_ALL=en_US.utf-8
 else
-  echo "WORD"
   alias ls='ls --color=auto'
 fi
 
-export PATH=/usr/local/bin:~/.bin:$PATH:~/.gem/ruby/1.8/bin
 export IGNOREEOF=1
 export PYTHONDONTWRITEBYTECODE=1
 export LESS=FRSX
 
 # virtualenvwrapper and pip
-export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
-export VIRTUALENV_DISTRIBUTE=1
+# export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+export PIP_INDEX_URL=http://localhost:3141/root/pypi/+simple/
+# export VIRTUALENV_DISTRIBUTE=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
@@ -112,14 +120,12 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
 fi
 
-
-
-# don't let virtualenv show prompts by itself
-
 alias rmpyc="find . -name "*.pyc" -exec rm -rf {} \;"
-alias diff='twdiff'
 
-# export EDITOR="subl"
+export PATH=/usr/local/share/npm/bin:$PATH
+export PATH=/usr/local/heroku/bin:$PATH
+export PATH=~/.bin:$PATH
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=$PATH:/opt/mongodb/bin # Add MongoDB to PATH
+
+export GOPATH="$HOME/Workspaces/Go"
