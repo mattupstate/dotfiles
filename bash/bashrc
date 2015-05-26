@@ -102,10 +102,6 @@ export IGNOREEOF=1
 export PYTHONDONTWRITEBYTECODE=1
 export LESS=FRSX
 
-# virtualenvwrapper and pip
-# export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
-export PIP_INDEX_URL=http://localhost:3141/root/pypi/+simple/
-# export VIRTUALENV_DISTRIBUTE=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
